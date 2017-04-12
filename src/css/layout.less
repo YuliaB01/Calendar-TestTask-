@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ECEAEA;
+}
+
+.calendar {
+  width: 400px;
+  margin: 100px auto 0;
+}
+
+.calendarHeader {
+  height: 50px;
+  text-align: center;
+  background: linear-gradient(to bottom, #b32b0c, #cd310d);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 10px;
+  position: relative;
+
+  span {
+    color: @header-text-color;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+  }
+
+  .monthName {
+    padding-right: 25px;
+  }
+
+  .left-hook,
+  .right-hook  {
+    width: 9px;
+    height: 28px;
+    position: absolute;
+    bottom:70%;
+    border-radius:10px;
+    background:#ececec;
+    background: linear-gradient(right top, @header-text-color, @hooks-bg-color);
+    background: -webkit-gradient(linear, right top, right bottom, from(@header-text-color), to(@hooks-bg-color));
+    box-shadow:0px -1px 2px rgba(0, 0, 0, 0.65 );
+  }
+  .right-hook {
+    right:15%;
+  }
+  .left-hook {
+    left: 15%;
+  }
+}
+
+.table {
+  width: 100%;
+  background-color: @header-text-color;
+
+  .days {
+    color: #a19d9d;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 5px;
+  }
+}
