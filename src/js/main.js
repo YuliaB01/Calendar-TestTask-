@@ -75,11 +75,12 @@ function createTableBody(year, month) {
     }
 
     var tbody = document.createElement("tbody");
+    tbody.className = "tbody";
     var tr = document.createElement("tr");
 
     for(var i = 1, j = 1; i <= lastMonthDay + weekDay; i++) {
         var td = document.createElement("td");
-        if(i < weekDay) {
+        if(i <= weekDay) {
             td.textContent = "";
         } else {
             td.textContent = j++;
@@ -95,9 +96,53 @@ function createTableBody(year, month) {
             tbody.appendChild(tr);
         }
     }
+    tbody.addEventListener("click", function(e) {
+        if(e.target.textContent != "") {
+            showModal(e, date, curYear);
+        }
+    });
 
     return tbody;
 }
 
-createCalendar("cal", 2017, 2);
+var closeBtn = document.getElementById("close-btn");
+
+closeBtn.addEventListener("click", function() {
+    document.getElementById("overlay").classList.remove("overlay");
+
+    var modal = document.getElementById("modal");
+    modal.style.display = "none";
+});
+
+document.addEventListener("keyup", function(e) {
+    hideModal(e);
+});
+
+function showModal(e, date, curYear) {
+    document.getElementById("overlay").classList.add("overlay");
+
+    document.getElementById("month").textContent = date.toLocaleString("en-us", {month: "long"});//shows month name in a full form
+    document.getElementById("year").textContent = curYear;
+    document.getElementById("date").textContent = e.target.textContent;
+
+    var modal = document.getElementById("modal");
+    modal.style.display = "inline-block";
+}
+
+function hideModal(e) {
+    var modal = document.getElementById("modal");
+    if(e.keyCode == 27 && modal.style.display == "inline-block") {
+        console.log(e.keyCode);
+        removeOverlay();
+    }
+}
+
+function removeOverlay() {
+    document.getElementById("overlay").classList.remove("overlay");
+
+    var modal = document.getElementById("modal");
+    modal.style.display = "none";
+}
+
+createCalendar("cal", 2017, 8);
 
