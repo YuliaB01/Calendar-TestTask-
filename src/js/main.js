@@ -96,6 +96,7 @@ function createTableBody(year, month) {
             tbody.appendChild(tr);
         }
     }
+
     tbody.addEventListener("click", function(e) {
         if(e.target.textContent != "") {
             showModal(e, date, curYear);
@@ -108,14 +109,13 @@ function createTableBody(year, month) {
 var closeBtn = document.getElementById("close-btn");
 
 closeBtn.addEventListener("click", function() {
-    document.getElementById("overlay").classList.remove("overlay");
-
-    var modal = document.getElementById("modal");
-    modal.style.display = "none";
+    hideModal();
 });
 
 document.addEventListener("keyup", function(e) {
-    hideModal(e);
+    if(e.keyCode == 27 && modal.style.display == "inline-block") {
+        hideModal();
+    }
 });
 
 function showModal(e, date, curYear) {
@@ -129,15 +129,7 @@ function showModal(e, date, curYear) {
     modal.style.display = "inline-block";
 }
 
-function hideModal(e) {
-    var modal = document.getElementById("modal");
-    if(e.keyCode == 27 && modal.style.display == "inline-block") {
-        console.log(e.keyCode);
-        removeOverlay();
-    }
-}
-
-function removeOverlay() {
+function hideModal() {
     document.getElementById("overlay").classList.remove("overlay");
 
     var modal = document.getElementById("modal");
