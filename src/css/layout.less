@@ -50,9 +50,11 @@ body {
     background: -webkit-gradient(linear, right top, right bottom, from(@header-text-color), to(@hooks-bg-color));
     box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.65 );
   }
+
   .right-hook {
     right:15%;
   }
+
   .left-hook {
     left: 15%;
   }
@@ -72,27 +74,22 @@ body {
     padding: 10px;
   }
 
-   td{
+  .day {
     text-align: center;
-     padding: 10px;
+    padding: 10px;
 
-     &:hover {
-       background-color: lighten(#cd310d, 2%);
-       color: @header-text-color;
-     }
+    &:hover {
+      background-color: lighten(#cd310d, 2%);
+      color: @header-text-color;
+      cursor: pointer;
+    }
 
-     &:active {
-       border: 1px solid #ccc;
-       background-color: @header-text-color;
-       color: #000;
+    &:active {
+      border: 1px solid #ccc;
+      background-color: @header-text-color;
+      color: #000;
       padding: 9px;
-     }
-
-     &:focus {
-       border: 1px solid #ccc;
-       background-color: lighten(#ccc, 5%);
-       color: #000;
-     }
+    }
   }
 
   tbody {
@@ -146,18 +143,30 @@ body {
     bottom: 0;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    text-align: center;
+
+    &:after {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      font-size: 0;
+      width: 0;
+      vertical-align: middle;
+    }
   }
 }
 
 #close-btn {
-  position: absolute;
-  right: -40px;
-  top: -40px;
   margin-bottom: 15px;
   border: none;
   background: transparent;
-  font-size: 35px;
-  z-index: 1;
+  display: inline-block;
+  color: @header-text-color;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &:focus {
     outline: 0;

@@ -76,6 +76,7 @@ function createTableBody(year, month) {
 
     var tbody = document.createElement("tbody");
     tbody.className = "tbody";
+
     var tr = document.createElement("tr");
 
     for(var i = 1, j = 1; i <= lastMonthDay + weekDay; i++) {
@@ -84,7 +85,9 @@ function createTableBody(year, month) {
             td.textContent = "";
         } else {
             td.textContent = j++;
+            td.className = "day";
         }
+
         tr.appendChild(td);
 
         if(i % 7 === 0) {
@@ -98,7 +101,7 @@ function createTableBody(year, month) {
     }
 
     tbody.addEventListener("click", function(e) {
-        if(e.target.textContent != "") {
+        if(e.target.classList.contains("day")) {
             showModal(e, date, curYear);
         }
     });
@@ -107,33 +110,32 @@ function createTableBody(year, month) {
 }
 
 var closeBtn = document.getElementById("close-btn");
-
 closeBtn.addEventListener("click", function() {
     hideModal();
 });
 
 document.addEventListener("keyup", function(e) {
-    if(e.keyCode == 27 && modal.style.display == "inline-block") {
+    if(e.keyCode == 27 && getModal().style.display == "inline-block") {
         hideModal();
     }
 });
 
+function getModal() {
+    return document.getElementById("modal");
+}
+
 function showModal(e, date, curYear) {
     document.getElementById("overlay").classList.add("overlay");
-
     document.getElementById("month").textContent = date.toLocaleString("en-us", {month: "long"});//shows month name in a full form
     document.getElementById("year").textContent = curYear;
     document.getElementById("date").textContent = e.target.textContent;
 
-    var modal = document.getElementById("modal");
-    modal.style.display = "inline-block";
+    getModal().style.display = "inline-block";
 }
 
 function hideModal() {
     document.getElementById("overlay").classList.remove("overlay");
-
-    var modal = document.getElementById("modal");
-    modal.style.display = "none";
+    getModal().style.display = "none";
 }
 
 createCalendar("cal", 2017, 8);
